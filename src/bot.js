@@ -1,19 +1,32 @@
-// at the top if not already present
+// --- at top of bot.js ---
 import fs from 'node:fs';
 import path from 'node:path';
 import YAML from 'yaml';
 
-// build an absolute path and read as UTF-8 text
 const scenariosPath = path.join(process.cwd(), 'src', 'scenarios.yaml');
-const scenariosText = fs.readFileSync(scenariosPath, 'utf8');  // << add 'utf8'
-const SCENARIOS = YAML.parse(scenariosText);
 
-// (optional) guard with a try/catch to log clearly if parsing fails
-// try {
-//   const scenariosText = fs.readFileSync(scenariosPath, 'utf8');
-//   const SCENARIOS = YAML.parse(scenariosText);
-// } catch (err) {
-//   console.error('Failed to load scenarios.yaml:', err);
-//   process.exit(1);
-// }
+let text;
+try {
+  text = fs.readFileSync(scenariosPath, 'utf8');        // read as UTF-8
+  if (typeof text !== 'string') text = text?.toString('utf8'); // belt & suspenders
+  if (!text || !text.trim()) {
+    throw new Error(`scenarios.yaml is empty at ${scenariosPath}`);
+  }
+  console.log(`[boot] Loaded scenarios.yaml (${text.length} chars)`);
+} catch (e) {
+  console.error('[boot] Could not read scenarios.yaml:', e);
+  process.exit(1);
+}
+
+let SCENARIOS;
+try {
+  SCENARIOS = YAML.parse(text);
+  console.log('[boot] Parsed scenarios.yaml OK');
+} catch (e) {
+  console.error('[boot] YAML.parse failed. First 120 chars:', text.slice(0, 120));
+  console.error(e);
+  process.exit(1);
+}
+
+// …rest of your bot code that uses SCENARIOS…
 
