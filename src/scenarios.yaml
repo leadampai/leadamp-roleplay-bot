@@ -1,0 +1,86 @@
+# Difficulty ranges influence objection frequency & patience thresholds
+_difficulties:
+  easy:
+    objection_rate: 0.2
+    patience_turns: 14
+  realistic:
+    objection_rate: 0.35
+    patience_turns: 10
+  hard:
+    objection_rate: 0.55
+    patience_turns: 7
+
+industries:
+  roofing:
+    prospect:
+      title: "Owner"
+      name_pool: ["Mike", "Jose", "Amber", "Tina", "Rob"]
+      context: |
+        You run a 7-person roofing company in a mid-size city. Busy season now, ad spend ~$6k/mo across Google & Meta.
+    common_pains:
+      - "We miss calls when crews are on roofs"
+      - "Lead vendors send junk leads"
+      - "Too many estimate requests, not enough booked jobs"
+    objections:
+      soft:
+        - "Just send me an email."
+        - "We already have someone for this."
+      hard:
+        - "Budget’s tight; we cut tools last month."
+        - "If this was so good, why haven’t I heard of it?"
+    success_criteria:
+      - "Book a 15–20 min demo for tomorrow or the next business day"
+      - "Confirm best contact number and email"
+
+  hvac:
+    prospect:
+      title: "Owner"
+      name_pool: ["Brian", "Kathy", "Omar", "Liam", "Sofia"]
+      context: |
+        Seasonal demand spikes, phones slam after 5pm. Using ServiceTitan + Google Ads + LSA; $8k/mo ad spend.
+    common_pains:
+      - "After-hours calls go to voicemail"
+      - "Techs aren’t great at following up"
+      - "Dispatch overloaded during heat waves"
+    objections:
+      soft: ["Text me details.", "We’re swamped right now."]
+      hard: ["I don’t buy from cold calls.", "Sounds like another answering service."]
+    success_criteria:
+      - "Book a demo"
+      - "Uncover current missed-call rate or after-hours setup"
+
+  medspa:
+    prospect:
+      title: "Manager"
+      name_pool: ["Grace", "Nina", "Ava", "Mila", "Daniel"]
+      context: |
+        You manage a medspa with 4 providers. Instagram DMs & phones are busy; you run monthly promos.
+    common_pains:
+      - "DMs pile up"
+      - "Front desk misses calls during treatments"
+      - "Promo leads ghost after initial interest"
+    objections:
+      soft: ["We’re fine for now.", "Send your deck."]
+      hard: ["We tried ‘AI’—didn’t work.", "Compliance concerns."]
+    success_criteria:
+      - "Book demo"
+      - "Identify conversion bottleneck (DMs, phones, promos)"
+
+routes:
+  cold_call:
+    opener_hints:
+      - "Be concise. Ask one permission question."
+      - "Offer a specific next step within 2 turns."
+    objective: "Book a demo in <15 turns while qualifying needs."
+
+  door_knock:
+    opener_hints:
+      - "Establish relevance in 10 seconds."
+      - "Use a visual or quick stat."
+    objective: "Set a calendar invite while onsite or collect best contact to confirm by SMS."
+
+  cold_dm:
+    opener_hints:
+      - "Short, value-forward. Avoid paragraphs."
+      - "Ask one easy reply question."
+    objective: "Move them to a 10–15 min call or book directly."
